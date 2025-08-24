@@ -35,7 +35,7 @@
                     {% for el in list_snippet %}
                     <tr>
                         <td scope="row">{{el.id}}</td>
-                        <td><a href="/snippets/{{el.id}}">{{el.name}}</a></td>
+                        <td><a href="{% url "page_snippet" el.id %}">{{el.name}}</a></td>
                         <td>{{el.creation_date}}</td>
                     </tr>
                     {% endfor %}
