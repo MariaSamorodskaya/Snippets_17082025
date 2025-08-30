@@ -1,5 +1,6 @@
-from django.http import Http404
+from django.http import Http404, HttpResponse
 from django.shortcuts import render, redirect
+from MainApp.forms import SnippetForm
 from MainApp.models import Snippet
 
 
@@ -9,7 +10,11 @@ def index_page(request):
 
 
 def add_snippet_page(request):
-    context = {'pagename': 'Добавление нового сниппета'}
+    form = SnippetForm()
+    context = {
+        'pagename': 'Добавление нового сниппета',
+        'form': form
+         }
     return render(request, 'pages/add_snippet.html', context)
 
 
@@ -28,3 +33,7 @@ def page_snippet(request, snippet_id: int):
     else:
         context = {'snippet': snippet}
         return render(request, 'pages/page_snippet.html', context)    
+    
+def create_snippet(request):
+    print(f"{request.POST = }")
+    return HttpResponse("Ok")
