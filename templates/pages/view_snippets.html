@@ -27,6 +27,7 @@
                     <tr>
                         <th scope="col">ID</th>
                         <th scope="col">Название</th>
+                        <th scope="col">Язык</th>                        
                         <th scope="col">Дата создания</th>
                     </tr>
                     </thead>
@@ -36,6 +37,7 @@
                     <tr>
                         <td scope="row">{{el.id}}</td>
                         <td><a href="{% url "page_snippet" el.id %}">{{el.name}}</a></td>
+                        <td>{{el.lang}}</td>
                         <td>{{el.creation_date}}</td>
                     </tr>
                     {% endfor %}
