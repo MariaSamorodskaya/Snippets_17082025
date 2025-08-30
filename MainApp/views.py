@@ -10,13 +10,22 @@ def index_page(request):
 
 
 def add_snippet_page(request):
-    form = SnippetForm()
-    context = {
-        'pagename': 'Добавление нового сниппета',
-        'form': form
-         }
-    return render(request, 'pages/add_snippet.html', context)
-
+    if request.method == "GET":    
+        form = SnippetForm()
+        context = {
+            'pagename': 'Добавление нового сниппета',
+            'form': form
+            }
+        return render(request, 'pages/add_snippet.html', context)
+    
+    if request.method == "POST":
+        form = SnippetForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect("snippet_list")
+        return render(request, 'pages/page_snippet.html', context={"form": form}) 
+    
+    return HttpResponseNotAllowed(["POST"],"You must make POST request to add snippet.")
 
 def snippets_page(request):
     list_snippet = Snippet.objects.all()
@@ -34,12 +43,3 @@ def page_snippet(request, snippet_id: int):
         context = {'snippet': snippet}
         return render(request, 'pages/page_snippet.html', context)    
     
-def create_snippet(request):
-    if request.method == "POST":
-        form = SnippetForm(request.POST)
-        if form.is_valid():
-            form.save()
-            return redirect("snippet_list")
-        return render(request, 'pages/page_snippet.html', context={"form": form}) 
-    
-    return HttpResponseNotAllowed(["POST"],"You must make POST request to add snippet.")
