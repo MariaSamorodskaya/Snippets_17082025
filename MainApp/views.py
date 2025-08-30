@@ -23,7 +23,7 @@ def add_snippet_page(request):
         if form.is_valid():
             form.save()
             return redirect("snippet_list")
-        return render(request, 'pages/page_snippet.html', context={"form": form}) 
+        return render(request, 'pages/add_snippet.html', context={"form": form}) 
     
     return HttpResponseNotAllowed(["POST"],"You must make POST request to add snippet.")
 
