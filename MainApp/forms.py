@@ -1,3 +1,4 @@
+from typing import Self
 from django.forms import ModelForm
 from MainApp.models import Snippet
 from django.forms import ValidationError
