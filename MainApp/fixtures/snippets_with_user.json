@@ -1,0 +1,79 @@
+[
+{
+    "model": "MainApp.snippet",
+    "pk": 1,
+    "fields": {
+        "name": "Hello world Snippet",
+        "lang": "py",
+        "code": "print(\"Hello world\")",
+        "creation_date": "2025-08-23T13:56:12.832Z",
+        "user": null
+    }
+},
+{
+    "model": "MainApp.snippet",
+    "pk": 2,
+    "fields": {
+        "name": "Hello Russia Snippet",
+        "lang": "py",
+        "code": "print(\"Hello Russia\")",
+        "creation_date": "2025-08-23T13:58:30.026Z",
+        "user": null
+    }
+},
+{
+    "model": "MainApp.snippet",
+    "pk": 3,
+    "fields": {
+        "name": "Goodbye world Snippet",
+        "lang": "py",
+        "code": "print(\"Goodbye world\")",
+        "creation_date": "2025-08-23T13:59:46.360Z",
+        "user": null
+    }
+},
+{
+    "model": "MainApp.snippet",
+    "pk": 4,
+    "fields": {
+        "name": "New snippet",
+        "lang": "py",
+        "code": "print(\"New snippet\")",
+        "creation_date": "2025-08-30T11:46:46.432Z",
+        "user": null
+    }
+},
+{
+    "model": "MainApp.snippet",
+    "pk": 16,
+    "fields": {
+        "name": "first HTML",
+        "lang": "html",
+        "code": "<head></head>",
+        "creation_date": "2025-08-30T20:31:27.951Z",
+        "user": null
+    }
+},
+{
+    "model": "MainApp.snippet",
+    "pk": 18,
+    "fields": {
+        "name": "User1's snippet",
+        "lang": "cpp",
+        "code": "cout<<\"hello\"",
+        "creation_date": "2025-08-31T14:55:39.008Z",
+        "user": 2
+    }
+},
+{
+    "model": "MainApp.snippet",
+    "pk": 19,
+    "fields": {
+        "name": "Example",
+        "lang": "js",
+        "code": "console.log(*Data*)",
+        "creation_date": "2025-08-31T15:00:14.708Z",
+        "user": 1
+    }
+}
+]
