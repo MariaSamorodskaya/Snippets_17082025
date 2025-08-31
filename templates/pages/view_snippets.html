@@ -29,6 +29,8 @@
                         <th scope="col">Название</th>
                         <th scope="col">Язык</th>                        
                         <th scope="col">Дата создания</th>
+                        <th scope="col"></th>
+                        <th scope="col"></th>
                     </tr>
                     </thead>
                     <tbody>
@@ -39,7 +41,25 @@
                         <td><a href="{% url "page_snippet" el.id %}">{{el.name}}</a></td>
                         <td>{{el.lang}}</td>
                         <td>{{el.creation_date}}</td>
-                    </tr>
+                        <td><a href="{% url "snippet-delete" el.id %}">                
+                            <div class="row">
+                                <div class="col-8">
+                                    <input type="submit" class = "btn btn-primary btn-block" value = "Delete">
+                                </div>   
+                            </div> 
+                            </a>
+                        </td>
+
+                        <td> 
+                            <a href="{% url "snippet-edit" el.id %}">                     
+                            <div class="row">
+                                <div class="col-8">
+                                    <input type="submit" class = "btn btn-primary btn-block" value = "Edit">
+                                </div>   
+                            </div> 
+                            </a>
+                        </td>
+                        </tr>
                     {% endfor %}
 
                     </tbody>
