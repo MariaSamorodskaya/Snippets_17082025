@@ -31,6 +31,7 @@
                         <th scope="col">Дата создания</th>
                         <th scope="col"></th>
                         <th scope="col"></th>
+                        <th scope="col">Пользователь</th>
                     </tr>
                     </thead>
                     <tbody>
@@ -43,7 +44,7 @@
                         <td>{{el.creation_date}}</td>
                         <td><a href="{% url "snippet-delete" el.id %}">                
                             <div class="row">
-                                <div class="col-8">
+                                <div class="col-10">
                                     <input type="submit" class = "btn btn-primary btn-block" value = "Delete">
                                 </div>   
                             </div> 
@@ -53,12 +54,13 @@
                         <td> 
                             <a href="{% url "snippet-edit" el.id %}">                     
                             <div class="row">
-                                <div class="col-8">
+                                <div class="col-10">
                                     <input type="submit" class = "btn btn-primary btn-block" value = "Edit">
                                 </div>   
                             </div> 
                             </a>
                         </td>
+                        <td> {{el.user.username}}</td>
                         </tr>
                     {% endfor %}
 
