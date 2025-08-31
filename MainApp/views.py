@@ -2,6 +2,7 @@ from django.http import Http404, HttpResponse, HttpResponseNotAllowed
 from django.shortcuts import render, redirect, get_object_or_404
 from MainApp.forms import SnippetForm
 from MainApp.models import Snippet
+from django.contrib import auth
 
 
 def index_page(request):
@@ -69,4 +70,23 @@ def snippet_edit(request, snippet_id: int):
         code_post = request.POST.get("code")
         Snippet.objects.filter(id=snippet_id).update(name=name_post, lang=lang_post,code=code_post)
         return redirect("snippet_list")
+    
+def login(request):
+    if request.method == 'POST':
+        username = request.POST.get("username")
+        password = request.POST.get("password")
+        # print("username =", username)
+        # print("password =", password)
+        user = auth.authenticate(request, username=username, password=password)
+        if user is not None:
+            auth.login(request, user)
+        else:
+        # Return error message
+            pass
+    return redirect('/')
+
+def logout(request):
+    auth.logout(request)
+    return redirect('/')
+
 
