@@ -7,7 +7,8 @@
         "lang": "py",
         "code": "print(\"Hello world\")",
         "creation_date": "2025-08-23T13:56:12.832Z",
-        "user": null
+        "user": null,
+        "status": false
     }
 },
 {
@@ -18,7 +19,8 @@
         "lang": "py",
         "code": "print(\"Hello Russia\")",
         "creation_date": "2025-08-23T13:58:30.026Z",
-        "user": null
+        "user": null,
+        "status": false
     }
 },
 {
@@ -29,7 +31,8 @@
         "lang": "py",
         "code": "print(\"Goodbye world\")",
         "creation_date": "2025-08-23T13:59:46.360Z",
-        "user": null
+        "user": null,
+        "status": false
     }
 },
 {
@@ -40,7 +43,8 @@
         "lang": "py",
         "code": "print(\"New snippet\")",
         "creation_date": "2025-08-30T11:46:46.432Z",
-        "user": null
+        "user": null,
+        "status": false
     }
 },
 {
@@ -51,7 +55,8 @@
         "lang": "html",
         "code": "<head></head>",
         "creation_date": "2025-08-30T20:31:27.951Z",
-        "user": null
+        "user": null,
+        "status": false
     }
 },
 {
@@ -62,7 +67,8 @@
         "lang": "cpp",
         "code": "cout<<\"hello\"",
         "creation_date": "2025-08-31T14:55:39.008Z",
-        "user": 2
+        "user": 2,
+        "status": false
     }
 },
 {
@@ -73,7 +79,20 @@
         "lang": "js",
         "code": "console.log(*Data*)",
         "creation_date": "2025-08-31T15:00:14.708Z",
-        "user": 1
+        "user": 1,
+        "status": false
+    }
+},
+{
+    "model": "MainApp.snippet",
+    "pk": 20,
+    "fields": {
+        "name": "my_snippet",
+        "lang": "py",
+        "code": "my_snippet_private",
+        "creation_date": "2025-09-03T09:03:38.546Z",
+        "user": 1,
+        "status": true
     }
 }
 ]

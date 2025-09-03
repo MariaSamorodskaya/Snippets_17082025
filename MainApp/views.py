@@ -34,7 +34,7 @@ def add_snippet_page(request):
     return HttpResponseNotAllowed(["POST"],"You must make POST request to add snippet.")
 
 def snippets_page(request):  
-    list_snippet = Snippet.objects.all()
+    list_snippet = Snippet.objects.all().filter(status=False)
     context = {'pagename': 'Просмотр сниппетов', 
             'list_snippet': list_snippet,
             'len_snippet': list_snippet.count()}
@@ -59,7 +59,7 @@ def snippet_delete(request, snippet_id: int):
 def snippet_edit(request, snippet_id: int):
     snippet = get_object_or_404(Snippet, id = snippet_id)
     if request.method == "GET":    
-        dictfields = {"name": snippet.name, "lang": snippet.lang, "code": snippet.code}
+        dictfields = {"name": snippet.name, "status": snippet.status, "lang": snippet.lang, "code": snippet.code}
         form = SnippetForm(initial = dictfields)
         context = {
             'pagename': 'Редактирование сниппета',
@@ -70,9 +70,10 @@ def snippet_edit(request, snippet_id: int):
     
     if request.method == "POST":
         name_post = request.POST.get("name")
+        status_post = request.POST.get("status")
         lang_post = request.POST.get("lang")
         code_post = request.POST.get("code")
-        Snippet.objects.filter(id=snippet_id).update(name=name_post, lang=lang_post,code=code_post)
+        Snippet.objects.filter(id=snippet_id).update(name=name_post, status=status_post,lang=lang_post,code=code_post)
         return redirect("snippet_list")
     
 def login(request):
