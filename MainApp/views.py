@@ -4,6 +4,7 @@ from MainApp.forms import SnippetForm
 from MainApp.models import Snippet
 from django.contrib import auth
 from django.contrib.auth.models import User
+from django.contrib.auth.decorators import login_required
 
 
 def index_page(request):
@@ -40,7 +41,6 @@ def snippets_page(request):
             'len_snippet': list_snippet.count()}
     return render(request, 'pages/view_snippets.html', context)
     
-
 def page_snippet(request, snippet_id: int):
     try:
         snippet = Snippet.objects.get(id = snippet_id)
@@ -50,31 +50,37 @@ def page_snippet(request, snippet_id: int):
         context = {'snippet': snippet}
         return render(request, 'pages/page_snippet.html', context)   
 
+@login_required()
 def snippet_delete(request, snippet_id: int):
-    if request.method == "GET" or request.method == "POST":
-        snippet = get_object_or_404(Snippet, id = snippet_id)
-        snippet.delete()
+    snippet = get_object_or_404(Snippet, id = snippet_id)
+    if snippet.user == request.user:
+        if request.method == "GET" or request.method == "POST":
+            snippet.delete()
+        return redirect("snippet_list")
     return redirect("snippet_list")
 
+@login_required(login_url="/login")
 def snippet_edit(request, snippet_id: int):
     snippet = get_object_or_404(Snippet, id = snippet_id)
-    if request.method == "GET":    
-        dictfields = {"name": snippet.name, "status": snippet.status, "lang": snippet.lang, "code": snippet.code}
-        form = SnippetForm(initial = dictfields)
-        context = {
-            'pagename': 'Редактирование сниппета',
-            'but_name': 'Сохранить изменения',
-            'form': form
-            }
-        return render(request, 'pages/add_snippet.html', context)
-    
-    if request.method == "POST":
-        name_post = request.POST.get("name")
-        status_post = request.POST.get("status")
-        lang_post = request.POST.get("lang")
-        code_post = request.POST.get("code")
-        Snippet.objects.filter(id=snippet_id).update(name=name_post, status=status_post,lang=lang_post,code=code_post)
-        return redirect("snippet_list")
+    if snippet.user == request.user:
+        if request.method == "GET":    
+            dictfields = {"name": snippet.name, "status": snippet.status, "lang": snippet.lang, "code": snippet.code}
+            form = SnippetForm(initial = dictfields)
+            context = {
+                'pagename': 'Редактирование сниппета',
+                'but_name': 'Сохранить изменения',
+                'form': form
+                }
+            return render(request, 'pages/add_snippet.html', context)
+        
+        if request.method == "POST":
+            name_post = request.POST.get("name")
+            status_post = request.POST.get("status")
+            lang_post = request.POST.get("lang")
+            code_post = request.POST.get("code")
+            Snippet.objects.filter(id=snippet_id).update(name=name_post, status=status_post,lang=lang_post,code=code_post)
+            return redirect("snippet_list")
+    return redirect("snippet_list")
     
 def login(request):
     if request.method == 'POST':
