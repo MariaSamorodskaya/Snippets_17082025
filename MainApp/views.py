@@ -3,6 +3,7 @@ from django.shortcuts import render, redirect, get_object_or_404
 from MainApp.forms import SnippetForm
 from MainApp.models import Snippet
 from django.contrib import auth
+from django.contrib.auth.models import User
 
 
 def index_page(request):
@@ -84,12 +85,19 @@ def login(request):
         if user is not None:
             auth.login(request, user)
         else:
-        # Return error message
-            pass
+            return render(request, 'pages/errors.html', context = {"error": f"Неверный логин или пароль"})
     return redirect('/')
 
 def logout(request):
     auth.logout(request)
     return redirect('/')
+
+def my_snippets(request):
+    if request.user.is_authenticated:
+        mysnippets = Snippet.objects.all().filter(user = request.user)
+        context = {'pagename': 'Мои сниппеты', 
+                'list_snippet': mysnippets,
+                'len_snippet': mysnippets.count()}
+        return render(request, 'pages/view_snippets.html', context)
 
 
