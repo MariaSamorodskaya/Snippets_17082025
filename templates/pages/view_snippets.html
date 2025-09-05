@@ -51,24 +51,29 @@
                         </td>
                         <td>{{el.lang}}</td>
                         <td>{{el.creation_date}}</td>
-                        <td><a href="{% url "snippet-delete" el.id %}">                
-                            <div class="row">
-                                <div class="col-10">
-                                    <input type="submit" class = "btn btn-primary btn-block" value = "Delete">
-                                </div>   
-                            </div> 
-                            </a>
-                        </td>
+                        {% if el.user == request.user %}
+                            <td><a href="{% url "snippet-delete" el.id %}">
+                                <div class="row">
+                                    <div class="col-10">
+                                        <input type="submit" class = "btn btn-primary btn-block" value = "Delete">
+                                    </div>   
+                                </div> 
+                                </a>
+                            </td>
 
-                        <td> 
-                            <a href="{% url "snippet-edit" el.id %}">                     
-                            <div class="row">
-                                <div class="col-10">
-                                    <input type="submit" class = "btn btn-primary btn-block" value = "Edit">
-                                </div>   
-                            </div> 
-                            </a>
-                        </td>
+                            <td> 
+                                <a href="{% url "snippet-edit" el.id %}">                     
+                                <div class="row">
+                                    <div class="col-10">
+                                        <input type="submit" class = "btn btn-primary btn-block" value = "Edit">
+                                    </div>   
+                                </div> 
+                                </a>
+                            </td>
+                        {% else %}
+                            <td></td>
+                            <td></td>
+                        {% endif %}    
                         <td> {{el.user.username}}</td>
                         </tr>
                     {% endfor %}

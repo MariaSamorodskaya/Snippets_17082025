@@ -64,8 +64,8 @@ def snippet_edit(request, snippet_id: int):
     snippet = get_object_or_404(Snippet, id = snippet_id)
     if snippet.user == request.user:
         if request.method == "GET":    
-            dictfields = {"name": snippet.name, "status": snippet.status, "lang": snippet.lang, "code": snippet.code}
-            form = SnippetForm(initial = dictfields)
+            #dictfields = {"name": snippet.name, "status": snippet.status, "lang": snippet.lang, "code": snippet.code}
+            form = SnippetForm(instance = snippet)
             context = {
                 'pagename': 'Редактирование сниппета',
                 'but_name': 'Сохранить изменения',
