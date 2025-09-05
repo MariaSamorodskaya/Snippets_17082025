@@ -76,7 +76,7 @@
     "pk": 19,
     "fields": {
         "name": "Example",
-        "lang": "js",
+        "lang": "html",
         "code": "console.log(*Data*)",
         "creation_date": "2025-08-31T15:00:14.708Z",
         "user": 1,
@@ -92,6 +92,18 @@
         "code": "my_snippet_private",
         "creation_date": "2025-09-03T09:03:38.546Z",
         "user": 1,
+        "status": true
+    }
+},
+{
+    "model": "MainApp.snippet",
+    "pk": 22,
+    "fields": {
+        "name": "user3's snippet",
+        "lang": "py",
+        "code": "print('user3')",
+        "creation_date": "2025-09-05T17:33:30.433Z",
+        "user": 4,
         "status": true
     }
 }
