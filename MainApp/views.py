@@ -1,7 +1,7 @@
 from django.http import Http404, HttpResponse, HttpResponseNotAllowed
 from django.shortcuts import render, redirect, get_object_or_404
-from MainApp.forms import SnippetForm, UserRegistrationForm
-from MainApp.models import Snippet
+from MainApp.forms import SnippetForm, UserRegistrationForm, CommentForm
+from MainApp.models import Snippet, Comment
 from django.contrib import auth
 from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required
@@ -48,6 +48,7 @@ def page_snippet(request, snippet_id: int):
         return render(request, 'pages/errors.html', context = {"error": f"Сниппет с id={snippet_id} не найден"})
     else:
         context = {'snippet': snippet}
+        context['comment_form'] = CommentForm()
         return render(request, 'pages/page_snippet.html', context)   
 
 @login_required()
@@ -127,3 +128,16 @@ def create_user(request):
             return redirect("/")
     context["form"] = form
     return render(request, 'pages/registration.html', context) 
+
+def comment_add(request):
+    if request.method == "POST":
+        comment_form = CommentForm(request.POST)
+        if comment_form.is_valid():
+            snippet_id = request.POST.get("snippet_id")
+            snippet = Snippet.objects.get(id=snippet_id)
+            comment = comment_form.save(commit=False)
+            comment.author = request.user
+            comment.snippet = snippet
+            comment.save()
+            return redirect('page_snippet', snippet_id=snippet.id)
+
